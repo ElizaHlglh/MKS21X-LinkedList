@@ -23,14 +23,17 @@ public class MyLinkedList{
         create.setPrev(end);
         end.setNext(create);
         end = create;
+	size++;
       }
     }
 
     public String toString(){
       String ans = "";
-      for (int i=0; i < size; i++){
-
+      Node current = start;
+      while(current != null){
+	ans += current.getData();
+	current = current.next();
       }
-      return
+      return ans; 
     }
 }
