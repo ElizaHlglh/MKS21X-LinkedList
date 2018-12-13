@@ -1,20 +1,39 @@
 public class Node{
-    private int data;
+    private Integer data;
     private Node next,prev;
 
-    public Node(int now) {
-      data = now;
+    public Node(Integer value) {//might not have constructor
+      data = value;
+      next = null;
+      prev = null;
     }
 
-    public Node(int now, int after){
-      next = new Node(after);
-      data = now;
+    public Node next(){
+      return next;
     }
 
-    public Node(int before, int now, int after){
-      prev = new Node(before);
-      next = new Node(after);
-      data = now;
+    public Node prev(){
+      return prev;
+    }
+
+    public void setNext(Node other){
+      next = other;
+    }
+
+    public void setPrev(Node other){
+      prev = other;
+    }
+
+    public Integer getData(){
+      return data;
+    }
+
+    public Integer setData(Integer i){
+      data = i;
+    }
+
+    public String toString(){
+      return data + "";
     }
 
 }

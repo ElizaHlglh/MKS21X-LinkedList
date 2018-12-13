@@ -1,18 +1,29 @@
 public class MyLinkedList{
-    private int size;
+    private int length;
     private Node start,end;
 
     public MyLinkedList(){
       size = 0;
+      start = null;
+      end = null;
     }
 
     public int size(){
-      return size;
+      return length;
     }
 
-    public boolean add(int value){
-      end = new Node(value);
-      return true;
+    public boolean add(Integer value){
+      if (size == 0){
+        create = new Node(value);
+        start = create;
+        end = create;
+      }
+      else{
+        create = new Node(value);
+        create.setPrev(end);
+        end.setNext(create);
+        end = create;
+      }
     }
 
     public String toString(){
