@@ -29,7 +29,9 @@ public class Node{
     }
 
     public Integer setData(Integer i){
+      Integer old = data;
       data = i;
+      return old;
     }
 
     public String toString(){
