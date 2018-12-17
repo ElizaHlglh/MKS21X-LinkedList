@@ -148,18 +148,24 @@ public class Driver {
 
         System.out.println("Removing Last Element:");
         System.out.println(list);
+        System.out.println(list.size());
         list.remove(8);
         System.out.println(list);
+        System.out.println(list.size());
         System.out.println("This should print: [0, 1, 2, 3, 4, 5, 6, 7]\n");
 
         System.out.println("Removing First Element:");
+        System.out.println(list.size());
         list.remove(0);
         System.out.println(list);
+        System.out.println(list.size());
         System.out.println("This should print: [1, 2, 3, 4, 5, 6, 7]\n");
 
         System.out.println("Adding to Last Element:");
-        list.add(8, (Integer) 8);
+        System.out.println(list.size());
+        list.add(7, (Integer) 8);
         System.out.println(list);
+        System.out.println(list.size());
         System.out.println("This should print: [1, 2, 3, 4, 5, 6, 7, 8]\n");
 
         System.out.println("Adding to First Element:");

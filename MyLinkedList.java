@@ -48,7 +48,10 @@ public class MyLinkedList{
     }
 
     public Integer get(int index){
-      try{
+      if (index >= length || index < 0){
+        throw new IndexOutOfBoundsException("Invalid index!!!");
+      }
+      else{
         Node current = getNode(index);
         if (current != null){
           return current.getData();
@@ -57,14 +60,16 @@ public class MyLinkedList{
           return null;
         }
       }
-      catch (IndexOutOfBoundsException e){
-        System.out.println("Invalid index!!!");
-      }
     }
 
     public Integer set(int index, Integer value){
-      Node ToChange = getNode(index);
-      return ToChange.setData(value);
+      if (index >= length || index < 0){
+        throw new IndexOutOfBoundsException("Invalid index!!!");
+      }
+      else{
+        Node ToChange = getNode(index);
+        return ToChange.setData(value);
+      }
     }
 
     public boolean contains(Integer value){
@@ -92,7 +97,11 @@ public class MyLinkedList{
     }
 
     public void add(int index, Integer value){
-      try{
+      if (index > length || index < 0){
+        throw new IndexOutOfBoundsException("Invalid index!!!");
+      }
+      else{
+        
         Node before = getNode(index-1);
         Node ToAdd = new Node(value);
         Node After = getNode(index);
@@ -102,40 +111,42 @@ public class MyLinkedList{
         After.setPrev(ToAdd);
         length++;
       }
-      catch (IndexOutOfBoundsException e){
-        System.out.println("Invalid index!!!");
-      }
     }
 
     public Integer remove(int index){
-      Node toRemove = getNode(index);
-      if (end == toRemove){
-        Node Before = toRemove.prev();
-        Before.setNext(null);
-        toRemove.setPrev(null);
-        toRemove.setNext(null);
-        end = Before;
-        length--;
-        return toRemove.getData();
-      }
-      else if(start == toRemove){
-        Node After = toRemove.next();
-        start = After;
-        After.setPrev(null);
-        toRemove.setPrev(null);
-        toRemove.setNext(null);
-        length--;
-        return toRemove.getData();
+      if (index >= length || index < 0){
+        throw new IndexOutOfBoundsException("Invalid index!!!");
       }
       else{
-        Node Before = toRemove.prev();
-        Node After = toRemove.next();
-        Before.setNext(After);
-        After.setPrev(Before);
-        toRemove.setPrev(null);
-        toRemove.setNext(null);
-        length--;
-        return toRemove.getData();
+        Node toRemove = getNode(index);
+        if (end == toRemove){
+          Node Before = toRemove.prev();
+          Before.setNext(null);
+          toRemove.setPrev(null);
+          toRemove.setNext(null);
+          end = Before;
+          length--;
+          return toRemove.getData();
+        }
+        else if(start == toRemove){
+          Node After = toRemove.next();
+          start = After;
+          After.setPrev(null);
+          toRemove.setPrev(null);
+          toRemove.setNext(null);
+          length--;
+          return toRemove.getData();
+        }
+        else{
+          Node Before = toRemove.prev();
+          Node After = toRemove.next();
+          Before.setNext(After);
+          After.setPrev(Before);
+          toRemove.setPrev(null);
+          toRemove.setNext(null);
+          length--;
+          return toRemove.getData();
+        }
       }
     }
 
