@@ -23,6 +23,9 @@ public class Driver {
         System.out.println(list);
         System.out.println("This should print: \"[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\"");
 
+        System.out.println(list.toStringReverse());
+        System.out.println("reverse : This should print: \"[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]\"");
+
         //Step Three: Adding a value to the middle
         System.out.println("#####################################");
         System.out.println("##Adding Values in the Middle Test:##");
@@ -179,5 +182,36 @@ public class Driver {
         list.add(0, (Integer) 666);
         System.out.println(list);
         System.out.println("This should print: [666, 1, 2, 3, 4, 5, 6, 7, 8]\n");
+
+        System.out.println(list.toStringReverse());
+        System.out.println("reverse : This should print: \"[8, 7, 6, 5, 4, 3, 2, 1, 666]\"");
+
+
+        //Step 11: Extend Testing
+        System.out.println("######################");
+        System.out.println("##Extend Testing:##");
+        System.out.println("######################\n");
+
+        MyLinkedList list2 = new MyLinkedList();
+
+        for(int i = 9; i > -1; i--) {
+            list2.add(i);
+            //System.out.println(list.size()); <- Debugging
+        }
+        System.out.println(list2);
+        System.out.println("This should print: \"[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]\"");
+
+        list.extend(list2);
+
+        System.out.println(list);
+        System.out.println("This should print: \"[666, 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]\"");
+
+        System.out.println(list.toStringReverse());
+        System.out.println("This should print: \"[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1, 666]\"");
+
+        System.out.println(list2);
+        System.out.println("This should print: \"[]\"");
+
+
     }
 }
