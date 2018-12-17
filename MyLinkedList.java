@@ -30,13 +30,21 @@ public class MyLinkedList{
     }
 
     public String toString(){
-      String ans = "{";
+      String ans = "[";
       Node current = start;
-      while(current != null){
+      for (int i = 0; i < length-1; i++){
         ans += current.getData() + ", ";
         current = current.next();
       }
-      return ans+"}";
+      if (length == 0){
+        return ans + "]";
+      }
+      if (current == start){ //if there is only one Element
+        return ans + current.getData() + "]";
+      }
+      else{
+        return ans + current.getData() + "]";
+      }
     }
 
     private Node getNode(int index){
@@ -101,15 +109,39 @@ public class MyLinkedList{
         throw new IndexOutOfBoundsException("Invalid index!!!");
       }
       else{
-        
-        Node before = getNode(index-1);
         Node ToAdd = new Node(value);
-        Node After = getNode(index);
-        before.setNext(ToAdd);
-        ToAdd.setPrev(before);
-        ToAdd.setNext(After);
-        After.setPrev(ToAdd);
-        length++;
+        if (end == getNode(index-1)){ //add at the end
+          end.setNext(ToAdd);
+          ToAdd.setPrev(end);
+          ToAdd.setNext(null);
+          end = ToAdd;
+          length++;
+        }
+        else if (start == getNode(index)){ //add at the front
+          if (start == end){
+            start.setNext(ToAdd);
+            ToAdd.setPrev(start);
+            ToAdd.setNext(null);
+            end = ToAdd;
+            length++;
+          }
+          else{
+            start.setPrev(ToAdd);
+            ToAdd.setPrev(null);
+            ToAdd.setNext(start);
+            start = ToAdd;
+            length++;
+          }
+        }
+        else{
+          Node before = getNode(index-1);
+          Node After = getNode(index);
+          before.setNext(ToAdd);
+          ToAdd.setPrev(before);
+          ToAdd.setNext(After);
+          After.setPrev(ToAdd);
+          length++;
+        }
       }
     }
 
