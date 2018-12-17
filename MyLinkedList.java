@@ -39,8 +39,20 @@ public class MyLinkedList{
       if (length == 0){
         return ans + "]";
       }
-      if (current == start){ //if there is only one Element
+      else{
         return ans + current.getData() + "]";
+      }
+    }
+
+    public String toStringReverse(){
+      String ans = "[";
+      Node current = end;
+      for (int i = length; i > 1; i--){
+        ans += current.getData() + ", ";
+        current = current.prev();
+      }
+      if (length == 0){
+        return ans + "]";
       }
       else{
         return ans + current.getData() + "]";
