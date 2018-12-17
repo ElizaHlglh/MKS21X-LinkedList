@@ -33,7 +33,7 @@ public class MyLinkedList{
       String ans = "{";
       Node current = start;
       while(current != null){
-        ans += current.getData();
+        ans += current.getData() + ", ";
         current = current.next();
       }
       return ans+"}";
@@ -48,12 +48,17 @@ public class MyLinkedList{
     }
 
     public Integer get(int index){
-      Node current = getNode(index);
-      if (current != null){
-        return current.getData();
+      try{
+        Node current = getNode(index);
+        if (current != null){
+          return current.getData();
+        }
+        else{
+          return null;
+        }
       }
-      else{
-        return null;
+      catch (IndexOutOfBoundsException e){
+        System.out.println("Invalid index!!!");
       }
     }
 
@@ -64,7 +69,7 @@ public class MyLinkedList{
 
     public boolean contains(Integer value){
       Node current = start;
-      while (current.next() != null){
+      while (current != null){
         if (current.getData() == value){
           return true;
         }
@@ -76,7 +81,7 @@ public class MyLinkedList{
     public int indexOf(Integer value){
       Node current = start;
       int count = 0;
-      while (current.next() != null){
+      while (current != null){
         if (current.getData() == value){
           return count;
         }
@@ -87,37 +92,85 @@ public class MyLinkedList{
     }
 
     public void add(int index, Integer value){
-      Node before = getNode(index-1);
-      Node ToAdd = new Node(value);
-      Node After = getNode(index);
-      before.setNext(ToAdd);
-      ToAdd.setPrev(before);
-      ToAdd.setNext(After);
-      After.setPrev(ToAdd);
+      try{
+        Node before = getNode(index-1);
+        Node ToAdd = new Node(value);
+        Node After = getNode(index);
+        before.setNext(ToAdd);
+        ToAdd.setPrev(before);
+        ToAdd.setNext(After);
+        After.setPrev(ToAdd);
+        length++;
+      }
+      catch (IndexOutOfBoundsException e){
+        System.out.println("Invalid index!!!");
+      }
     }
 
     public Integer remove(int index){
       Node toRemove = getNode(index);
-      Node Before = getNode(index-1);
-      Node After = getNode(index+1);
-      Before.setNext(After);
-      After.setPrev(Before);
-      toRemove.setPrev(null);
-      toRemove.setNext(null);
-      return toRemove.getData();
+      if (end == toRemove){
+        Node Before = toRemove.prev();
+        Before.setNext(null);
+        toRemove.setPrev(null);
+        toRemove.setNext(null);
+        end = Before;
+        length--;
+        return toRemove.getData();
+      }
+      else if(start == toRemove){
+        Node After = toRemove.next();
+        start = After;
+        After.setPrev(null);
+        toRemove.setPrev(null);
+        toRemove.setNext(null);
+        length--;
+        return toRemove.getData();
+      }
+      else{
+        Node Before = toRemove.prev();
+        Node After = toRemove.next();
+        Before.setNext(After);
+        After.setPrev(Before);
+        toRemove.setPrev(null);
+        toRemove.setNext(null);
+        length--;
+        return toRemove.getData();
+      }
     }
 
     public boolean remove(Integer value){
       if (contains(value)){
         int index = indexOf(value);
         Node toRemove = getNode(index);
-        Node Before = getNode(index-1);
-        Node After = getNode(index+1);
-        Before.setNext(After);
-        After.setPrev(Before);
-        toRemove.setPrev(null);
-        toRemove.setNext(null);
-        return true;
+        if (end == toRemove){
+          Node Before = toRemove.prev();
+          Before.setNext(null);
+          toRemove.setPrev(null);
+          toRemove.setNext(null);
+          end = Before;
+          length--;
+          return true;
+        }
+        else if(start == toRemove){
+          Node After = toRemove.next();
+          start = After;
+          After.setPrev(null);
+          toRemove.setPrev(null);
+          toRemove.setNext(null);
+          length--;
+          return true;
+        }
+        else{
+          Node Before = toRemove.prev();
+          Node After = toRemove.next();
+          Before.setNext(After);
+          After.setPrev(Before);
+          toRemove.setPrev(null);
+          toRemove.setNext(null);
+          length--;
+          return true;
+        }
       }
       else{
         return false;
